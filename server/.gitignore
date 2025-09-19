@@ -1,0 +1,41 @@
+#
+# yo!log SERVER
+#
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+downloads/
+lib/
+lib64/
+wheels/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environments
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+
+# PyCharm
+.idea/
+
+# Visual Studio Code
+ .vscode/
+
+# PyPI configuration file
+.pypirc
