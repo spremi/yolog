@@ -1,0 +1,23 @@
+#
+# yo!log
+#
+
+
+#
+# Automatic backup files
+#
+*~
+*.swp
+
+#
+# Patch & diff files
+#
+*.patch
+*.diff
+*.orig
+*.rej
+
+#
+# Specifically, don't ignore these files
+#
+!.gitignore
