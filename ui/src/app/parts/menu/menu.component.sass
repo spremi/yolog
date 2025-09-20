@@ -1,0 +1,45 @@
+\:host
+  display: flex
+  flex-direction: row
+  height: 100vh
+  position: relative
+
+  .menu
+    display: flex
+    flex-direction: column
+    width: 64px
+    background: var(--dark-color)
+    padding: 0
+    // Ensure that menu always remain on top
+    z-index: 10
+
+    .spacer
+      flex-grow: 1
+
+    button
+      background: none
+      border: none
+      padding: 15px 0
+      color: white
+      font-size: 20px
+      cursor: pointer
+
+      img
+        width: 36px
+        height: 36px
+        transition: transform 250ms ease
+
+      &:hover
+        img
+          transform: scale(1.2)
+
+      &.now
+        img
+          transform: scale(0.6)
+
+      &:active
+        animation: flicker 250ms
+
+      &:disabled
+        opacity: 0.5
+        cursor: default

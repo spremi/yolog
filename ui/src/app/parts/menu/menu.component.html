@@ -1,1 +1,97 @@
-<p>menu works!</p>
+<div class="menu">
+  <img ngSrc="/yo-log-512px.svg"
+    width="64"
+    height="64"
+    alt="LOGO"
+    priority />
+
+  <button
+    [class.now]="activeRoute === '/' || activeRoute === '/home'"
+    [disabled]="activeRoute === '/' || activeRoute === '/home'">
+
+    <img ngSrc="/icons/home.svg"
+      width="48"
+      height="48"
+      alt="HOME" />
+  </button>
+
+  <button
+    [class.now]="activeMenu === 'level'">
+
+    <img ngSrc="/icons/stairs.svg"
+      width="48"
+      height="48"
+      alt="Select Levels" />
+  </button>
+
+  <button
+    [class.now]="activeMenu === 'column'">
+
+    <img ngSrc="/icons/table_chart.svg"
+      width="48"
+      height="48"
+      alt="Select Columns" />
+  </button>
+
+  <button
+    [class.now]="activeMenu === 'filter'">
+
+    <img ngSrc="/icons/app_registration.svg"
+      width="48"
+      height="48"
+      alt="Filter Columns" />
+  </button>
+
+  <div class="spacer"></div>
+
+  <button>
+    <img [ngSrc]="logPaused ? '/icons/play.svg' : '/icons/pause.svg'"
+      width="48"
+      height="48"
+      alt="Play/Pause" />
+  </button>
+
+  <div class="spacer"></div>
+
+  <button>
+
+    <img ngSrc="/icons/swap_horiz.svg"
+      width="48"
+      height="48"
+      alt="Swap Position" />
+  </button>
+
+  <div class="spacer"></div>
+
+  <button
+    [class.now]="activeRoute === '/settings'"
+    [disabled]="activeRoute === '/settings'">
+
+    <img ngSrc="/icons/settings.svg"
+      width="48"
+      height="48"
+      alt="Settings" />
+  </button>
+
+  <div class="spacer"></div>
+
+  <button
+    [class.now]="activeRoute === '/license'"
+    [disabled]="activeRoute === '/license'">
+
+    <img ngSrc="/icons/license.svg"
+      width="48"
+      height="48"
+      alt="License" />
+  </button>
+
+  <button
+    [class.now]="activeRoute === '/about'"
+    [disabled]="activeRoute === '/about'">
+
+    <img ngSrc="/icons/signpost.svg"
+      width="48"
+      height="48"
+      alt="About" />
+  </button>
+</div>
