@@ -12,6 +12,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 
+import { SettingsService } from '@base/services/settings.service';
+
 @Component({
   selector: 'sp-menu',
   imports: [
@@ -27,6 +29,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   private IDLE_TIMEOUT_MS = 5000;
 
   private router = inject(Router);
+  private settingSvc = inject(SettingsService);
 
   private routeSub: Subscription | null = null;
 
@@ -55,5 +58,12 @@ export class MenuComponent implements OnInit, OnDestroy {
    */
   go(target: string): void {
     this.router.navigate([`/${target}`]);
+  }
+
+  /**
+   * Toggle menu position
+   */
+  togglePosition(): void {
+    this.settingSvc.toggleMenuPosition();
   }
 }
