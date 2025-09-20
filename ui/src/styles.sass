@@ -25,6 +25,13 @@
 
 :root
   --dark-color: #151b24
+  --accent-color: #fbb040
+  --contrast-color: #48a048
+
+  --divider-color: #e0e0e0
+
+  --button-close-bg-color: transparent
+  --button-close-hover-bg-color: var(--dark-color)
 
 
 *
@@ -39,3 +46,28 @@ body
   padding: 0
   font-family: TechnaSans
   overflow: clip
+
+//
+// Horizontal spacer
+//
+.h-spacer
+  flex-grow: 1
+
+
+//
+// Close button
+//
+button.close
+  display: inline-block
+  margin: 0
+  padding: 0
+  line-height: 0
+  cursor: pointer
+  background-color: var(--button-close-bg-color)
+  text-decoration: none
+  border: none
+  transition: background-color 500ms ease
+  border-radius: 50%
+
+  &:hover
+    background-color: var(--button-close-hover-bg-color)
