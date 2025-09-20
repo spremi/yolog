@@ -1,0 +1,11 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'sp-about',
+  imports: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.sass'
+})
+export class AboutComponent {
+
+}
