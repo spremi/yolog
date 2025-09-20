@@ -40,3 +40,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Patch & diff files
+*.patch
+*.diff
+*.orig
+*.rej
+
+# Specifically, don't ignore these files
+!.gitignore
