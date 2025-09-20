@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="yo-log.svg"
+   inkscape:export-filename="/home/develop/source/mixed/yolog/yo-log-64px.png"
+   inkscape:export-xdpi="12"
+   inkscape:export-ydpi="12"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.0141844"
+     inkscape:cx="291.36714"
+     inkscape:cy="199.66784"
+     inkscape:window-width="1510"
+     inkscape:window-height="930"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     showgrid="true">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="32"
+       enabled="true"
+       visible="true" />
+    <inkscape:page
+       x="0"
+       y="0"
+       width="512"
+       height="512"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#151b24;fill-opacity:1;stroke-width:2;stroke-linecap:round"
+       id="rect2"
+       width="512"
+       height="512"
+       x="0"
+       y="0"
+       ry="0.625" />
+    <text
+       xml:space="preserve"
+       style="font-size:220px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#fbb040;fill-opacity:1;stroke-width:2;stroke-linecap:round"
+       x="86.929741"
+       y="218"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="86.929741"
+         y="218"
+         style="font-style:italic;font-variant:normal;font-weight:800;font-stretch:normal;font-size:220px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold Italic';fill:#fbb040;fill-opacity:1">yo!</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:200px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:2;stroke-linecap:round"
+       x="31.499847"
+       y="445.20001"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="31.499847"
+         y="445.20001"
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:200px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#ffffff;fill-opacity:1">LOG</tspan></text>
+  </g>
+</svg>
