@@ -7,11 +7,12 @@
 //
 
 
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { BodyComponent } from "@parts/body/body.component";
 import { MenuComponent } from '@parts/menu/menu.component';
+import { SettingsService } from '@services/settings.service';
 
 @Component({
   selector: 'sp-root',
@@ -23,11 +24,13 @@ import { MenuComponent } from '@parts/menu/menu.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
   host: {
-    '[class.menu-left]': `menuPosition === 'left'`
+    '[class.menu-left]': `menuPosition() === 'left'`
   }
 })
 export class AppComponent {
-  @Input() menuPosition: 'left' | 'right' = 'right';
+  private settingsSvc = inject(SettingsService);
+
+  readonly menuPosition = this.settingsSvc.getMenuPosition();
 
   title = 'yo!LOG';
 }
