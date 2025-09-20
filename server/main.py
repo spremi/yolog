@@ -9,6 +9,8 @@ import uvicorn
 
 from fastapi import FastAPI
 
+from routes.log import router as router_log
+
 
 PORT_OTLP_HTTP = int(os.getenv('PORT_OTLP_HTTP', 4318))
 PORT_OTLP_GRPC = int(os.getenv('PORT_OTLP_GRPC', 4317))
@@ -30,6 +32,8 @@ logger = logging.getLogger(__name__)
 # OTLP Receiver
 #
 log_receiver: FastAPI = FastAPI(title='yo!log OTLP Receiver')
+
+log_receiver.include_router(router_log)
 
 #
 # LOG Provider
