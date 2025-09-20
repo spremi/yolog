@@ -7,7 +7,8 @@
 
   <button
     [class.now]="activeRoute === '/' || activeRoute === '/home'"
-    [disabled]="activeRoute === '/' || activeRoute === '/home'">
+    [disabled]="activeRoute === '/' || activeRoute === '/home'"
+    (click)="go('home')">
 
     <img ngSrc="/icons/home.svg"
       width="48"
@@ -65,7 +66,8 @@
 
   <button
     [class.now]="activeRoute === '/settings'"
-    [disabled]="activeRoute === '/settings'">
+    [disabled]="activeRoute === '/settings'"
+    (click)="go('settings')">
 
     <img ngSrc="/icons/settings.svg"
       width="48"
@@ -77,7 +79,8 @@
 
   <button
     [class.now]="activeRoute === '/license'"
-    [disabled]="activeRoute === '/license'">
+    [disabled]="activeRoute === '/license'"
+    (click)="go('license')">
 
     <img ngSrc="/icons/license.svg"
       width="48"
@@ -87,7 +90,8 @@
 
   <button
     [class.now]="activeRoute === '/about'"
-    [disabled]="activeRoute === '/about'">
+    [disabled]="activeRoute === '/about'"
+    (click)="go('about')">
 
     <img ngSrc="/icons/signpost.svg"
       width="48"

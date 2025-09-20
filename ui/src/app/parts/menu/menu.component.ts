@@ -49,4 +49,11 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.routeSub?.unsubscribe();
     this.routeSub = null;
   }
+
+  /**
+   * Navigate to specified route.
+   */
+  go(target: string): void {
+    this.router.navigate([`/${target}`]);
+  }
 }
