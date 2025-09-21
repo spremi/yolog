@@ -8,6 +8,7 @@ import os
 import uvicorn
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from routes.log import router as router_log
 from routes.stream import router as router_stream
@@ -42,6 +43,21 @@ log_receiver.include_router(router_log)
 log_provider: FastAPI = FastAPI(title='yo!log LOG Provider')
 
 log_provider.include_router(router_stream)
+
+env_allowed_origins = os.getenv('APP_URI', 'http://localhost:4200')
+
+allowed_origins = [
+    origin.strip() for origin in env_allowed_origins.split(",") if origin.strip()
+]
+
+log_provider.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_methods=['GET', 'POST', 'OPTIONS'],
+    allow_headers=['Content-Type'],
+    allow_credentials=False,
+    max_age=300,
+)
 
 
 @log_provider.get('/')
