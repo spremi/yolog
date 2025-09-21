@@ -8,3 +8,9 @@
 
 
 export type MenuPosition = 'left' | 'right';
+
+
+/**
+ * Defines generic structure of log as dictionary.
+ */
+export type LogEntry = Record<string, string>;
