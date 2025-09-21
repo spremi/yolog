@@ -30,6 +30,7 @@ export interface LogColumn {
  * Make the objeect immutable and literal.
  */
 export const LOG_KEYS = {
+  UID: 'uid',     // Internal Unique ID for benefit of Angular rendering.
   TS: 'ts',
   ENV: 'env',
   LEVEL: 'level',
@@ -38,8 +39,8 @@ export const LOG_KEYS = {
   SERVICE: 'service',
   MODULE: 'module',
   LOGGER: 'logger',
-  THREAD: 'thread',
   PROCESS: 'process',
+  THREAD: 'thread',
   TRACE_ID: 'traceId',
   SPAN_ID: 'spanId',
   SEVERITY: 'severity',
@@ -47,78 +48,115 @@ export const LOG_KEYS = {
   ATTRIBUTES: 'attributes',
 } as const;
 
+
+/**
+ * Derive 'type' from union of LOG_KEY values.
+ *
+ */
+type LogKey = typeof LOG_KEYS[keyof typeof LOG_KEYS];
+
+/**
+ * User friendly labels for the keys.
+ * (Using strong types to ensure that structures are always in sync)
+ */
+export const LOG_LABELS: Record<LogKey, string> = {
+  [LOG_KEYS.UID]: 'UID',
+  [LOG_KEYS.TS]: 'Timestamp',
+  [LOG_KEYS.ENV]: 'Environment',
+  [LOG_KEYS.LEVEL]: 'Level',
+  [LOG_KEYS.MESSAGE]: 'Message',
+  [LOG_KEYS.HOST]: 'Host',
+  [LOG_KEYS.SERVICE]: 'Service',
+  [LOG_KEYS.MODULE]: 'Module',
+  [LOG_KEYS.LOGGER]: 'Logger',
+  [LOG_KEYS.PROCESS]: 'Process',
+  [LOG_KEYS.THREAD]: 'Thread',
+  [LOG_KEYS.TRACE_ID]: 'Trace ID',
+  [LOG_KEYS.SPAN_ID]: 'Span ID',
+  [LOG_KEYS.SEVERITY]: 'Severity',
+  [LOG_KEYS.IP]: 'IP',
+  [LOG_KEYS.ATTRIBUTES]: 'Attributes',
+};
+
 /**
  * Initialize column attributes.
+ * Array enforces a sequence - necessary for consistent visualization.
+ * UID is meant for internal object tracking. So, it is not included here.
  */
 export const LOG_COLUMNS: LogColumn[] = [
   {
     key: LOG_KEYS.TS,
-    label: 'Timestamp',
-    show: ShowColumn.FALSE,
+    label: LOG_LABELS[LOG_KEYS.TS],
+    show: ShowColumn.TRUE,
   },
   {
     key: LOG_KEYS.ENV,
-    label: 'Environment',
+    label: LOG_LABELS[LOG_KEYS.ENV],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.LEVEL,
-    label: 'Level',
+    label: LOG_LABELS[LOG_KEYS.LEVEL],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.MESSAGE,
-    label: 'Message',
+    label: LOG_LABELS[LOG_KEYS.MESSAGE],
     show: ShowColumn.ALWAYS,
   },
   {
     key: LOG_KEYS.HOST,
-    label: 'Host',
+    label: LOG_LABELS[LOG_KEYS.HOST],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.SERVICE,
-    label: 'Service',
+    label: LOG_LABELS[LOG_KEYS.SERVICE],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.MODULE,
-    label: 'Module',
+    label: LOG_LABELS[LOG_KEYS.MODULE],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.LOGGER,
-    label: 'Logger',
+    label: LOG_LABELS[LOG_KEYS.LOGGER],
+    show: ShowColumn.FALSE,
+  },
+  {
+    key: LOG_KEYS.PROCESS,
+    label: LOG_LABELS[LOG_KEYS.PROCESS],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.THREAD,
-    label: 'Thread',
+    label: LOG_LABELS[LOG_KEYS.THREAD],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.TRACE_ID,
-    label: 'Trace ID',
+    label: LOG_LABELS[LOG_KEYS.TRACE_ID],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.SPAN_ID,
-    label: 'Span ID',
+    label: LOG_LABELS[LOG_KEYS.SPAN_ID],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.SEVERITY,
-    label: 'Severity',
+    label: LOG_LABELS[LOG_KEYS.SEVERITY],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.IP,
-    label: 'IP',
+    label: LOG_LABELS[LOG_KEYS.IP],
     show: ShowColumn.FALSE,
   },
   {
     key: LOG_KEYS.ATTRIBUTES,
-    label: 'Attributes',
+    label: LOG_LABELS[LOG_KEYS.ATTRIBUTES],
     show: ShowColumn.FALSE,
   },
 ];
