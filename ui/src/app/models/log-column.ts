@@ -122,3 +122,41 @@ export const LOG_COLUMNS: LogColumn[] = [
     show: ShowColumn.FALSE,
   },
 ];
+
+/**
+ * Mapper to normalize various incoming keys.
+ */
+export const LOG_KEYS_MAP = {
+  'timestamp': LOG_KEYS.TS,
+  'environment': LOG_KEYS.ENV,
+  'text': LOG_KEYS.MESSAGE,
+  'span_id': LOG_KEYS.SPAN_ID,
+  'trace_id': LOG_KEYS.TRACE_ID,
+  'thread_id': LOG_KEYS.THREAD,
+  'process_id': LOG_KEYS.PROCESS,
+  'logger_name': LOG_KEYS.LOGGER,
+  'service_name': LOG_KEYS.SERVICE,
+  'module_name': LOG_KEYS.MODULE,
+  'severity_number': LOG_KEYS.SEVERITY,
+  'hostname': LOG_KEYS.HOST,
+  'host_name': LOG_KEYS.HOST,
+  'ip_addr': LOG_KEYS.IP,
+} as const;
+
+/**
+ * Defines a guard for converting arbitrary 'string' to key in LOG_MAPPER.
+ */
+function isLogMapperKey(key: string) : key is keyof typeof LOG_KEYS_MAP {
+  return key in LOG_KEYS_MAP;
+}
+
+/**
+ * Get normalized key - if it is found in LOG_MAPPER.
+ */
+export function getNormalizedKey(key: string) : string | undefined {
+  if (isLogMapperKey(key)) {
+    return LOG_KEYS_MAP[key];
+  }
+
+  return undefined;
+}
