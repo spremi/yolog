@@ -13,6 +13,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 
 import { SettingsService } from '@base/services/settings.service';
+import { StateService } from '@base/services/state.service';
 
 @Component({
   selector: 'sp-menu',
@@ -30,6 +31,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private router = inject(Router);
   private settingSvc = inject(SettingsService);
+  private stateSvc = inject(StateService);
 
   private routeSub: Subscription | null = null;
 
@@ -65,5 +67,14 @@ export class MenuComponent implements OnInit, OnDestroy {
    */
   togglePosition(): void {
     this.settingSvc.toggleMenuPosition();
+  }
+
+  /**
+   * Toggle logging.
+   */
+  toggleLogging(): void {
+    this.stateSvc.toggleLogging();
+
+    this.logPaused = this.stateSvc.isLogPaused();
   }
 }

@@ -45,7 +45,7 @@
 
   <div class="spacer"></div>
 
-  <button>
+  <button (click)="toggleLogging()">
     <img [ngSrc]="logPaused ? '/icons/play.svg' : '/icons/pause.svg'"
       width="48"
       height="48"
