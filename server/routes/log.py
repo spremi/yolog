@@ -13,6 +13,8 @@ from opentelemetry.proto.collector.logs.v1.logs_service_pb2 import (
     ExportLogsServiceResponse,
 )
 
+from state import log_queue_lock, log_queue
+
 from adapters.adapt_log import adapt_log
 
 router = APIRouter()
@@ -49,7 +51,10 @@ async def log_otlp(request: Request):
             for record in scope_logs.log_records:
                 entry = adapt_log(resource_logs, scope_logs, record)
 
-                logger.info(json.dumps(entry.__dict__, indent=4))
+                # logger.info(json.dumps(entry.__dict__, indent=4))
+
+                async with log_queue_lock:
+                    log_queue.append(entry)
 
     # Return protobuf response
     resp = ExportLogsServiceResponse()
