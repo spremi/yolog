@@ -12,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { BodyComponent } from "@parts/body/body.component";
 import { MenuComponent } from '@parts/menu/menu.component';
-import { SettingsService } from '@services/settings.service';
+import { StateService } from './services/state.service';
 
 @Component({
   selector: 'sp-root',
@@ -28,9 +28,9 @@ import { SettingsService } from '@services/settings.service';
   }
 })
 export class AppComponent {
-  private settingsSvc = inject(SettingsService);
+  private stateSvc = inject(StateService);
 
-  readonly menuPosition = this.settingsSvc.getMenuPosition();
+  readonly menuPosition = this.stateSvc.getMenuPosition();
 
   title = 'yo!LOG';
 }
