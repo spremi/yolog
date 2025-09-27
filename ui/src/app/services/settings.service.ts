@@ -7,17 +7,23 @@
 //
 
 
-import { Injectable, signal, Signal } from '@angular/core';
+import { Injectable, signal, Signal, WritableSignal } from '@angular/core';
 
+import { DEFAULT_MENU_POSITION } from '@base/app.defaults';
 import { MenuPosition } from '@base/app.types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
-  private _menuPosition = signal<MenuPosition>('right');
+  private readonly K_MENU = 'menu';
 
-  constructor() { }
+  private _menuPosition: WritableSignal<MenuPosition>;
+
+  constructor() {
+    const menu = this.readStore<MenuPosition>(this.K_MENU, DEFAULT_MENU_POSITION);
+    this._menuPosition = signal(menu);
+  }
 
   public getMenuPosition(): Signal<MenuPosition> {
     return this._menuPosition.asReadonly();
@@ -27,5 +33,25 @@ export class SettingsService {
     const nextPos = (this._menuPosition() === 'left' ? 'right' : 'left');
 
     this._menuPosition.set(nextPos);
+
+    localStorage.setItem(this.K_MENU, JSON.stringify(nextPos));
+  }
+
+  /**
+   * Read value from local storage. Else, provide default.
+   */
+  private readStore<T>(key: string, defaultValue: T): T {
+    const v = localStorage.getItem(key);
+
+    if (v == null) {
+      return defaultValue;
+    }
+
+    try {
+      return JSON.parse(v);
+    } catch (err) {
+      console.log('readStore: ' + err);
+    }
+    return defaultValue;
   }
 }

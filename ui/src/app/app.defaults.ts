@@ -25,3 +25,8 @@ export const DEFAULT_LOG_COLUMNS = ['ts', 'message'];
  * Number of logs to keep.
  */
 export const DEFAULT_LOG_COUNT = 500;
+
+/**
+ * Keep menu position in original design as default.
+ */
+export const DEFAULT_MENU_POSITION = 'right';
