@@ -94,7 +94,14 @@ export class MenuComponent implements OnInit, OnDestroy {
    * Toggle menu position
    */
   togglePosition(): void {
+    // Temporarily disable animations
+    const panel = this.panelRef.nativeElement;
+    panel.classList.add('silent');
+
     this.settingSvc.toggleMenuPosition();
+
+    // Enable animations again
+    setTimeout(() => panel.classList.remove('silent'), 50);
   }
 
   /**
