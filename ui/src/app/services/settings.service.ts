@@ -7,7 +7,7 @@
 //
 
 
-import { Injectable, signal, Signal, WritableSignal } from '@angular/core';
+import { computed, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 
 import {
   DEFAULT_LOG_COLUMNS,
@@ -16,6 +16,7 @@ import {
   DEFAULT_MENU_POSITION
 } from '@base/app.defaults';
 import { MenuPosition } from '@base/app.types';
+import { AppSettings } from '@base/models/app-settings';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,8 @@ export class SettingsService {
   private _logCount: WritableSignal<number>;
   private _viewColumns: WritableSignal<string[]>;
 
+  // Derived signal - Combination of individual signals above.
+  private readonly _appSettings: Signal<AppSettings>;
 
   constructor() {
     const menu = this.readStore<MenuPosition>(this.K_MENU, DEFAULT_MENU_POSITION);
@@ -44,6 +47,13 @@ export class SettingsService {
 
     const viewColumns = this.readStore<string[]>(this.K_VIEW_COLUMNS, DEFAULT_LOG_COLUMNS);
     this._viewColumns = signal(viewColumns);
+
+    this._appSettings = computed<AppSettings>(() => ({
+      menuPosition: this._menuPosition(),
+      logLevel: this._logLevel(),
+      logCount: this._logCount(),
+      viewColumns: this._viewColumns(),
+    }));
   }
 
   public getMenuPosition(): Signal<MenuPosition> {
@@ -85,6 +95,10 @@ export class SettingsService {
   public setViewColumns(columns: string[]) {
     this._viewColumns.set(columns);
     localStorage.setItem(this.K_VIEW_COLUMNS, JSON.stringify(columns));
+  }
+
+  public getAppSettings(): Signal<AppSettings> {
+    return this._appSettings;
   }
 
   /**
