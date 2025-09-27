@@ -1,1 +1,21 @@
-<p>home works!</p>
+<div class="log-table-wrapper">
+  <table class="log-table">
+    <thead>
+      <tr>
+        @for (col of showColumns; track col.key) {
+        <th [class.message]="col.key === 'message'">{{ col.label }}</th>
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (log of logs(); track log['uid']) {
+        <tr [ngClass]="classByLevel(log['level'])">
+          @for (col of showColumns; track col.key) {
+            <td>{{ log[col.key] }}</td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

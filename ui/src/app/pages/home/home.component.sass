@@ -1,0 +1,73 @@
+\:host
+  display: flex
+  flex-direction: column
+  flex: 1 1 auto
+  height: 100vh
+
+  .log-table-wrapper
+    display: block
+    overflow: auto
+    min-height: 0
+    flex: 1 1 auto
+    align-items: flex-start
+
+    .log-table
+      width: 100%
+      border-collapse: collapse
+      font-family: FiraCode, monospace
+      font-size: 8pt
+
+      th, td
+        width: auto
+        border-bottom: 1px solid #ddd
+        padding: 4px 8px
+        white-space: nowrap
+        text-align: left
+
+      th
+        background: #f8f8f8
+        position: sticky
+        top: 0
+        font-size: 10pt
+        z-index: 1
+
+        &.message
+          width: 100%
+
+      tr
+        pointer-events: auto
+
+        &.selected
+          background: #fff3e0
+
+        &:hover
+          background: #f0f0f0
+
+      //
+      // Colors for each level
+      // (Must match levels in models/log-levels.ts)
+      //
+      .log-1  // Trace
+        font-weight: 300
+        color: #455a64
+
+      .log-2  // Debug
+        font-weight: 300
+        color: #388e3c
+
+      .log-3  // Info
+        font-weight: 400
+        color: #212121
+
+      .log-4  // Warn
+        font-weight: 400
+        color: #f57c00
+
+      .log-5  // Error
+        font-weight: 500
+        color: #ff5252
+
+      .log-6  // Critical
+        font-weight: 500
+        color: #ffffff
+        background-color: #d32f2f
