@@ -10,6 +10,7 @@
 import { Injectable, signal, Signal, WritableSignal } from '@angular/core';
 
 import {
+  DEFAULT_LOG_COLUMNS,
   DEFAULT_LOG_COUNT,
   DEFAULT_LOG_LEVEL,
   DEFAULT_MENU_POSITION
@@ -23,10 +24,12 @@ export class SettingsService {
   private readonly K_MENU = 'menu';
   private readonly K_LOG_LEVEL = 'level';
   private readonly K_LOG_COUNT = 'count';
+  private readonly K_VIEW_COLUMNS = 'cols';
 
   private _menuPosition: WritableSignal<MenuPosition>;
   private _logLevel: WritableSignal<number>;
   private _logCount: WritableSignal<number>;
+  private _viewColumns: WritableSignal<string[]>;
 
 
   constructor() {
@@ -38,6 +41,9 @@ export class SettingsService {
 
     const logCount = this.readStore<number>(this.K_LOG_COUNT, DEFAULT_LOG_COUNT);
     this._logCount = signal(logCount);
+
+    const viewColumns = this.readStore<string[]>(this.K_VIEW_COLUMNS, DEFAULT_LOG_COLUMNS);
+    this._viewColumns = signal(viewColumns);
   }
 
   public getMenuPosition(): Signal<MenuPosition> {
@@ -70,6 +76,15 @@ export class SettingsService {
     this._logCount.set(count);
 
     localStorage.setItem(this.K_LOG_COUNT, count.toString());
+  }
+
+  public getViewColumns(): string[] {
+    return this._viewColumns();
+  }
+
+  public setViewColumns(columns: string[]) {
+    this._viewColumns.set(columns);
+    localStorage.setItem(this.K_VIEW_COLUMNS, JSON.stringify(columns));
   }
 
   /**
