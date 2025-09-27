@@ -17,7 +17,8 @@
   </button>
 
   <button
-    [class.now]="activeMenu === 'level'">
+    [class.now]="activeMenu === 'level'"
+    (click)="togglePanel('level')">
 
     <img ngSrc="/icons/stairs.svg"
       width="48"
@@ -26,7 +27,8 @@
   </button>
 
   <button
-    [class.now]="activeMenu === 'column'">
+    [class.now]="activeMenu === 'column'"
+    (click)="togglePanel('column')">
 
     <img ngSrc="/icons/table_chart.svg"
       width="48"
@@ -35,7 +37,8 @@
   </button>
 
   <button
-    [class.now]="activeMenu === 'filter'">
+    [class.now]="activeMenu === 'filter'"
+    (click)="togglePanel('filter')">
 
     <img ngSrc="/icons/app_registration.svg"
       width="48"
@@ -98,4 +101,7 @@
       height="48"
       alt="About" />
   </button>
+</div>
+
+<div #panelRef [class]="getPosition() + ' panel'">
 </div>

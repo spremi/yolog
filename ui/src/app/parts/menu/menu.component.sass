@@ -43,3 +43,48 @@
       &:disabled
         opacity: 0.5
         cursor: default
+
+  .panel
+    position: absolute
+    top: 0
+    height: 100%
+    width: 300px
+    background: var(--dark-color)
+    color: #fcfcfc
+    box-shadow: 0 0 10px rgba(0,0,0,0.3)
+    transition: all 300ms ease
+    overflow: auto
+    z-index: 5              // Keep below 'menu'
+
+    &.left
+      left: 64px
+      transform: translateX(-100%)
+
+      &.p-opening,
+      &.open
+        transform: translateX(0)
+
+    &.right
+      right: 0px
+      transform: translateX(100%)
+
+      &.p-opening,
+      &.open
+        right: 64px
+        transform: translateX(0)
+    //
+    // Used temporarily when switching position.
+    // Else, animations start in reaction to change in position.
+    //
+    &.silent
+      transition: none !important
+      opacity: 1
+
+
+@keyframes flicker
+  0%
+    filter: brightness(1)
+  50%
+    filter: brightness(2)
+  100%
+    filter: brightness(1)
