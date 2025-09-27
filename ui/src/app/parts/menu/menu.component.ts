@@ -13,7 +13,6 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, fromEvent, merge, of, Subscription, switchMap, timer } from 'rxjs';
 
 import { MenuPosition } from '@base/app.types';
-import { SettingsService } from '@base/services/settings.service';
 import { StateService } from '@base/services/state.service';
 
 /**
@@ -41,7 +40,6 @@ export class MenuComponent implements OnInit, OnDestroy {
   private IDLE_TIMEOUT_MS = 5000;
 
   private router = inject(Router);
-  private settingSvc = inject(SettingsService);
   private stateSvc = inject(StateService);
 
   private routeSub: Subscription | null = null;
@@ -86,7 +84,7 @@ export class MenuComponent implements OnInit, OnDestroy {
    * Get menu position.
    */
   getPosition(): MenuPosition {
-    const pos = this.settingSvc.getMenuPosition();
+    const pos = this.stateSvc.getMenuPosition();
     return pos();
   }
 
@@ -98,7 +96,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     const panel = this.panelRef.nativeElement;
     panel.classList.add('silent');
 
-    this.settingSvc.toggleMenuPosition();
+    this.stateSvc.toggleMenuPosition();
 
     // Enable animations again
     setTimeout(() => panel.classList.remove('silent'), 50);
