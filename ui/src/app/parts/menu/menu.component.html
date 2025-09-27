@@ -104,4 +104,30 @@
 </div>
 
 <div #panelRef [class]="getPosition() + ' panel'">
+  <div class="fields">
+  @switch (activeMenu) {
+    @case ('level') {
+    <!-- Filter log levels -->
+      <div class="title">Select LOG Level</div>
+
+      <fieldset>
+        <legend>Select LOG Level</legend>
+
+        @for (level of logLevels; track level.key) {
+          <label class="sp-radio">
+            <input type="radio"
+              name="logLevel"
+              value="level.key"
+              [checked]="getLogLevel() == level.value"
+              (change)="setLogLevel(level.value)" />
+
+            <span class="icon"></span>
+
+            {{ level.label }}
+          </label>
+        }
+      </fieldset>
+    }
+  }
+  </div>
 </div>

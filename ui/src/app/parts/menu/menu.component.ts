@@ -14,6 +14,7 @@ import { filter, fromEvent, merge, of, Subscription, switchMap, timer } from 'rx
 
 import { MenuPosition } from '@base/app.types';
 import { StateService } from '@base/services/state.service';
+import { LOG_LEVELS } from '@base/models/log-level';
 
 /**
  * Different states of menu panel - required during transitions.
@@ -44,6 +45,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private routeSub: Subscription | null = null;
   private idleSub: Subscription | null = null;
+
+  readonly logLevels = LOG_LEVELS;
 
   activeMenu: string | null = null;
   nextMenu: string | null = null;
@@ -138,6 +141,21 @@ export class MenuComponent implements OnInit, OnDestroy {
 
     // No active menu. Open 'chosen' menu.
     this.openMenu(menu);
+  }
+
+  /**
+   * Get current log level.
+   */
+  getLogLevel(): number {
+    const levels = this.stateSvc.getLogLevel();
+    return levels();
+  }
+
+  /**
+   * Set log level.
+   */
+  setLogLevel(level: number): void {
+    this.stateSvc.setLogLevel(level);
   }
 
   /**
