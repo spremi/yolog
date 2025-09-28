@@ -103,7 +103,8 @@
   </button>
 </div>
 
-<div #panelRef [class]="getPosition() + ' panel'">
+<div #panelRef [class]="getPosition() + ' panel'"
+  [class.full]="activeMenu === 'filter'">
   <div class="fields">
   @switch (activeMenu) {
     @case ('level') {
@@ -150,6 +151,91 @@
           </label>
         }
       </fieldset>
+    }
+
+    @case ('filter') {
+      <!-- Dynamic filters -->
+      <div class="filters">
+        <div class="filter">
+          <div class="title">ENVIRONMENTS</div>
+          <fieldset>
+            <legend>ENVIRONMENTS</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">HOSTS</div>
+          <fieldset>
+            <legend>HOSTS</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">SERVICES</div>
+          <fieldset>
+            <legend>SERVICES</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">MODULES</div>
+          <fieldset>
+            <legend>MODULES</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">PROCESSES</div>
+          <fieldset>
+            <legend>PROCESSES</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">THREADS</div>
+          <fieldset>
+            <legend>THREADS</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">TRACES</div>
+          <fieldset>
+            <legend>TRACES</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">SPANS</div>
+          <fieldset>
+            <legend>SPANS</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">SEVERITY</div>
+          <fieldset>
+            <legend>SEVERITY</legend>
+
+          </fieldset>
+        </div>
+
+        <div class="filter">
+          <div class="title">IP</div>
+          <fieldset>
+            <legend>IP</legend>
+
+          </fieldset>
+        </div>
+      </div>
     }
   }
   </div>
