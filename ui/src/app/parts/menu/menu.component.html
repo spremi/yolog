@@ -128,6 +128,29 @@
         }
       </fieldset>
     }
+
+    @case ('column') {
+      <!-- Filter log columns -->
+      <div class="title">Select LOG Level</div>
+
+      <fieldset>
+        <legend>Select LOG Columns</legend>
+
+        @for (col of logColumns; track col.key) {
+          <label class="sp-checkbox">
+            <input type="checkbox"
+              name="{{ col.key }}"
+              [disabled]="isColumnAlways(col.key)"
+              [checked]="isColumnShow(col.key)"
+              (change)="toggleColumn(col.key)" />
+
+            <span class="icon"></span>
+
+            {{ col.label }}
+          </label>
+        }
+      </fieldset>
+    }
   }
   </div>
 </div>

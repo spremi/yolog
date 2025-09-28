@@ -15,6 +15,7 @@ import { filter, fromEvent, merge, of, Subscription, switchMap, timer } from 'rx
 import { MenuPosition } from '@base/app.types';
 import { StateService } from '@base/services/state.service';
 import { LOG_LEVELS } from '@base/models/log-level';
+import { LOG_COLUMNS, ShowColumn } from '@base/models/log-column';
 
 /**
  * Different states of menu panel - required during transitions.
@@ -47,6 +48,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   private idleSub: Subscription | null = null;
 
   readonly logLevels = LOG_LEVELS;
+  readonly logColumns = LOG_COLUMNS;
 
   activeMenu: string | null = null;
   nextMenu: string | null = null;
@@ -156,6 +158,55 @@ export class MenuComponent implements OnInit, OnDestroy {
    */
   setLogLevel(level: number): void {
     this.stateSvc.setLogLevel(level);
+  }
+
+  /**
+   * Is column always visible?
+   */
+  isColumnAlways(key: string): boolean {
+    const column = LOG_COLUMNS.find((c) => c.key === key);
+    if (column) {
+      return column.show === ShowColumn.ALWAYS;
+    }
+
+    return false;
+  }
+
+  /**
+   * Is column visible?
+   */
+  isColumnShow(key: string): boolean {
+    const viewColumns = this.stateSvc.getViewColumns();
+
+    return viewColumns().includes(key);
+  }
+
+  /**
+   * Toggle column visibility.
+   */
+  toggleColumn(key: string): void {
+    const column = LOG_COLUMNS.find((c) => c.key === key);
+    if (!column) {
+     return;
+    }
+
+    if (column.show === ShowColumn.ALWAYS) {
+      // No change allowed.
+      return;
+    }
+
+    const viewColumns = this.stateSvc.getViewColumns();
+    const oldColumns = viewColumns();
+
+    let newColumns = undefined;
+
+    if (oldColumns.includes(key)) {
+      newColumns = oldColumns.filter(col => col !== key);
+    } else {
+      newColumns = [...oldColumns, key];
+    }
+
+    this.stateSvc.setViewColumns(newColumns);
   }
 
   /**

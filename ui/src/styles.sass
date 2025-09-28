@@ -104,3 +104,42 @@ button.close
     background-position: center
     background-size: contain
     transition: background-image 250ms ease
+
+//
+// Custom checkbox
+//
+.sp-checkbox
+  display: inline-flex
+  align-items: center
+  cursor: pointer
+  user-select: none
+  gap: 8px
+
+  input[type="checkbox"]
+    position: absolute
+    opacity: 0
+    width: 0
+    height: 0
+    pointer-events: none
+
+  input:not(:checked) + .icon
+    background-image: url('/icons/radio_unchecked.svg')
+    opacity: 1
+
+  input:checked + .icon
+    background-image: url('/icons/radio_checked.svg')
+    opacity: 1
+
+  .icon
+    width: 24px
+    height: 24px
+    background-repeat: no-repeat
+    background-position: center
+    background-size: contain
+
+    opacity: 1
+    will-change: opacity
+
+  &:has(input:disabled)
+    opacity: 0.6
+    cursor: not-allowed
