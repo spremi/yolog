@@ -8,13 +8,14 @@
 
 
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 
 import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
 import { LOG_COLUMNS, LogColumn, ShowColumn } from '@base/models/log-column';
 import { numericLogLevel } from '@base/models/log-level';
 
 import { LogService } from '@base/services/log.service';
+import { StateService } from '@base/services/state.service';
 
 @Component({
   selector: 'sp-home',
@@ -27,6 +28,7 @@ import { LogService } from '@base/services/log.service';
 export class HomeComponent {
 
   logSvc = inject(LogService);
+  stateSvc = inject(StateService);
 
   logColumns = LOG_COLUMNS;
 
@@ -38,19 +40,24 @@ export class HomeComponent {
   /**
    * List of columns selected for viewing.
    */
-  showColumns: LogColumn[] = this.selectColumns();
+  showColumns: LogColumn[];
+
+  constructor() {
+    const initColumns = this.stateSvc.getViewColumns();
+
+    this.showColumns = this.logColumns.filter(c => initColumns().includes(c.key));
+
+    effect(() => {
+      const updatedColumns = this.stateSvc.getViewColumns();
+
+      this.showColumns = this.logColumns.filter(c => updatedColumns().includes(c.key));
+    });
+  }
 
   /**
    * Get class name based on log level.
    */
   public classByLevel(level: string | undefined) : string {
     return 'log-' + (level ? numericLogLevel(level) : DEFAULT_LOG_LEVEL);
-  }
-
-  /**
-   * Select columns to show.
-   */
-  private selectColumns(): LogColumn[] {
-    return this.logColumns.filter(c => c.show !== ShowColumn.FALSE);
   }
 }
