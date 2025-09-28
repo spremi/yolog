@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { v4 as uuidv4 } from 'uuid';
 
-import { DEFAULT_LOG_COUNT, DEFAULT_LOG_LEVEL } from '@base/app.defaults';
+import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
 import { LogEntry } from '@base/app.types';
 import { getNormalizedKey, LOG_KEYS } from '@base/models/log-column';
 
@@ -67,8 +67,8 @@ export class LogService {
       const newLogs = [normalized, ...rows];
 
       // Ensure we don't cross maximum log count.
-      // TODO: Replace with configurable value.
-      const maxCount = DEFAULT_LOG_COUNT
+      const maxCountSignal = this.stateSvc.getLogCount();
+      const maxCount = maxCountSignal();
 
       return newLogs.length > maxCount ? newLogs.slice(0, maxCount) : newLogs;
     });
