@@ -7,7 +7,7 @@
 //
 
 
-import { inject, Injectable, Signal, signal } from '@angular/core';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
 import { LogEntry } from '@base/app.types';
 import { getNormalizedKey, LOG_KEYS } from '@base/models/log-column';
+import { CollectedValues, DynamicFilterKeys } from '@base/models/log-filters';
 
 import { StateService } from './state.service';
 
@@ -72,6 +73,8 @@ export class LogService {
 
       return newLogs.length > maxCount ? newLogs.slice(0, maxCount) : newLogs;
     });
+
+    this.updateDynamicFilters(normalized);
   }
 
   /**
@@ -103,5 +106,27 @@ export class LogService {
     normalized[LOG_KEYS.UID] = uuidv4();
 
     return normalized;
+  }
+
+  /**
+   * Extract values from log to be in dynamic filters.
+   */
+  private updateDynamicFilters(log: LogEntry): void {
+    (Object.entries(CollectedValues) as [DynamicFilterKeys, WritableSignal<Set<string>>][])
+      .forEach(([key, signal]) => {
+        // Get value corresponding to the key
+        const v = log[key];
+
+        if (v) {
+          // Mutate set only for new values to reduce signal propagation.
+          signal.update(prev => {
+            if (prev.has(v)) {
+              return prev;
+            }
+
+            return new Set(prev).add(v);
+          });
+        }
+      });
   }
 }
