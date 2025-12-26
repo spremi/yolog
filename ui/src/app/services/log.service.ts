@@ -87,6 +87,26 @@ export class LogService {
   }
 
   /**
+   * Toggles specified value in appropriate user filter.
+   */
+  toggleUserFilter(key: string, value: string): void {
+    if (isDynamicFilterKey(key)) {
+
+      UserFilters[key].update(prev => {
+          const next = new Set(prev);
+
+          if (prev.has(value)) {
+            next.delete(value);
+          } else {
+            next.add(value)
+          }
+
+          return next;
+      });
+    }
+  }
+
+  /**
    * Encapsulates actions to be performed when new log is received.
    */
   private onNewLog(log: LogEntry) {
