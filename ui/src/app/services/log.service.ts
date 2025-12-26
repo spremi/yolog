@@ -16,7 +16,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
 import { LogEntry } from '@base/app.types';
 import { getNormalizedKey, LOG_KEYS } from '@base/models/log-column';
-import { CollectedValues, DynamicFilterKeys } from '@base/models/log-filters';
+import {
+  CollectedValues, DynamicFilterKeys, isDynamicFilterKey
+} from '@base/models/log-filters';
 
 import { StateService } from './state.service';
 
@@ -51,6 +53,21 @@ export class LogService {
 
   public getLogs(): Signal<LogEntry[]> {
     return this._logs.asReadonly();
+  }
+
+  /**
+   * Get collected filters for specified key.
+   */
+  public getCollectedFilters(key: string): string[] {
+        let valueSet: Set<string>;
+
+    if (isDynamicFilterKey(key)) {
+      valueSet = CollectedValues[key]();
+    } else {
+      valueSet = new Set();
+    }
+
+    return [... valueSet ].sort();
   }
 
   /**
