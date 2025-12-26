@@ -17,7 +17,8 @@ import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
 import { LogEntry } from '@base/app.types';
 import { getNormalizedKey, LOG_KEYS } from '@base/models/log-column';
 import {
-  CollectedValues, DynamicFilterKeys, isDynamicFilterKey
+  CollectedValues, DynamicFilterKeys, isDynamicFilterKey,
+  UserFilters
 } from '@base/models/log-filters';
 
 import { StateService } from './state.service';
@@ -63,6 +64,21 @@ export class LogService {
 
     if (isDynamicFilterKey(key)) {
       valueSet = CollectedValues[key]();
+    } else {
+      valueSet = new Set();
+    }
+
+    return [... valueSet ].sort();
+  }
+
+  /**
+   * Returns array of user filters corresponding to specified key.
+   */
+  getUserFilters(key: string): string[] {
+    let valueSet: Set<string>;
+
+    if (isDynamicFilterKey(key)) {
+      valueSet = UserFilters[key]();
     } else {
       valueSet = new Set();
     }
