@@ -160,7 +160,15 @@
           <div class="title">ENVIRONMENTS</div>
           <fieldset>
             <legend>ENVIRONMENTS</legend>
-
+            @for (env of collectedFilters(logKeys.ENV); track env) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="env-{{ env }}"
+                      [checked]="isUserFilter(logKeys.ENV, env)"
+                      (change)="toggleFilter(logKeys.ENV, env)" />
+                <span class="icon"></span>
+                {{  env }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -168,7 +176,15 @@
           <div class="title">HOSTS</div>
           <fieldset>
             <legend>HOSTS</legend>
-
+            @for (host of collectedFilters(logKeys.HOST); track host) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="host-{{ host }}"
+                      [checked]="isUserFilter(logKeys.HOST, host)"
+                      (change)="toggleFilter(logKeys.HOST, host)" />
+                <span class="icon"></span>
+                {{  host }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -176,7 +192,15 @@
           <div class="title">SERVICES</div>
           <fieldset>
             <legend>SERVICES</legend>
-
+            @for (service of collectedFilters(logKeys.SERVICE); track service) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="svc-{{ service }}"
+                      [checked]="isUserFilter(logKeys.HOST, service)"
+                      (change)="toggleFilter(logKeys.HOST, service)" />
+                <span class="icon"></span>
+                {{  service }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -184,7 +208,15 @@
           <div class="title">MODULES</div>
           <fieldset>
             <legend>MODULES</legend>
-
+            @for (module of collectedFilters(logKeys.MODULE); track module) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="module-{{ module }}"
+                      [checked]="isUserFilter(logKeys.MODULE, module)"
+                      (change)="toggleFilter(logKeys.MODULE, module)" />
+                <span class="icon"></span>
+                {{ module }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -192,7 +224,15 @@
           <div class="title">PROCESSES</div>
           <fieldset>
             <legend>PROCESSES</legend>
-
+            @for (process of collectedFilters(logKeys.PROCESS); track process) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="process-{{ process }}"
+                      [checked]="isUserFilter(logKeys.PROCESS, process)"
+                      (change)="toggleFilter(logKeys.PROCESS, process)" />
+                <span class="icon"></span>
+                {{ process }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -200,7 +240,15 @@
           <div class="title">THREADS</div>
           <fieldset>
             <legend>THREADS</legend>
-
+            @for (thread of collectedFilters(logKeys.THREAD); track thread) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="thread-{{ thread }}"
+                      [checked]="isUserFilter(logKeys.THREAD, thread)"
+                      (change)="toggleFilter(logKeys.THREAD, thread)" />
+                <span class="icon"></span>
+                {{ thread }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -208,7 +256,15 @@
           <div class="title">TRACES</div>
           <fieldset>
             <legend>TRACES</legend>
-
+            @for (traceId of collectedFilters(logKeys.TRACE_ID); track traceId) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="trace-{{ traceId }}"
+                      [checked]="isUserFilter(logKeys.TRACE_ID, traceId)"
+                      (change)="toggleFilter(logKeys.TRACE_ID, traceId)" />
+                <span class="icon"></span>
+                {{ traceId }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -216,7 +272,15 @@
           <div class="title">SPANS</div>
           <fieldset>
             <legend>SPANS</legend>
-
+            @for (spanId of collectedFilters(logKeys.SPAN_ID); track spanId) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="span-{{ spanId }}"
+                      [checked]="isUserFilter(logKeys.SPAN_ID, spanId)"
+                      (change)="toggleFilter(logKeys.SPAN_ID, spanId)" />
+                <span class="icon"></span>
+                {{ spanId }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -224,7 +288,15 @@
           <div class="title">SEVERITY</div>
           <fieldset>
             <legend>SEVERITY</legend>
-
+            @for (severity of collectedFilters(logKeys.SEVERITY); track severity) {
+              <label class="sp-checkbox">
+                <input type="checkbox" name="sev-{{ severity }}"
+                      [checked]="isUserFilter(logKeys.SEVERITY, severity)"
+                      (change)="toggleFilter(logKeys.SEVERITY, severity)" />
+                <span class="icon"></span>
+                {{ severity }}
+              </label>
+            }
           </fieldset>
         </div>
 
@@ -232,7 +304,15 @@
           <div class="title">IP</div>
           <fieldset>
             <legend>IP</legend>
-
+              @for (ip of collectedFilters(logKeys.IP); track ip) {
+                <label class="sp-checkbox">
+                  <input type="checkbox" name="ip-{{ ip }}"
+                        [checked]="isUserFilter(logKeys.IP, ip)"
+                        (change)="toggleFilter(logKeys.IP, ip)" />
+                  <span class="icon"></span>
+                  {{ ip }}
+                </label>
+              }
           </fieldset>
         </div>
       </div>

@@ -15,7 +15,8 @@ import { filter, fromEvent, merge, of, Subscription, switchMap, timer } from 'rx
 import { MenuPosition } from '@base/app.types';
 import { StateService } from '@base/services/state.service';
 import { LOG_LEVELS } from '@base/models/log-level';
-import { LOG_COLUMNS, ShowColumn } from '@base/models/log-column';
+import { LOG_COLUMNS, LOG_KEYS, ShowColumn } from '@base/models/log-column';
+import { LogService } from '@base/services/log.service';
 
 /**
  * Different states of menu panel - required during transitions.
@@ -42,6 +43,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   private IDLE_TIMEOUT_MS = 5000;
 
   private router = inject(Router);
+  private logSvc = inject(LogService);
   private stateSvc = inject(StateService);
 
   private routeSub: Subscription | null = null;
@@ -49,6 +51,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   readonly logLevels = LOG_LEVELS;
   readonly logColumns = LOG_COLUMNS;
+  readonly logKeys = LOG_KEYS;
 
   activeMenu: string | null = null;
   nextMenu: string | null = null;
@@ -208,6 +211,30 @@ export class MenuComponent implements OnInit, OnDestroy {
 
     this.stateSvc.setViewColumns(newColumns);
   }
+
+  /**
+   * Get values for dynamic filters.
+   */
+  collectedFilters(key: string): string[] {
+    return this.logSvc.getCollectedFilters(key);
+  }
+
+  /**
+   * Does specified filter include the value?
+   */
+  isUserFilter(key: string, value: string): boolean {
+    const filters = this.logSvc.getUserFilters(key);
+
+    return filters.includes(value);
+  }
+
+  /**
+   * Toggle filter selection.
+   */
+  toggleFilter(key: string, value: string): void {
+    this.logSvc.toggleUserFilter(key, value);
+  }
+
 
   /**
    * Open specified menu.
