@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
 
 import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
-import { LOG_COLUMNS, LogColumn, ShowColumn } from '@base/models/log-column';
+import { LogEntry } from '@base/app.types';
+import { LOG_COLUMNS, LOG_KEYS, LogColumn, ShowColumn } from '@base/models/log-column';
 import { numericLogLevel } from '@base/models/log-level';
 
 import { LogService } from '@base/services/log.service';
@@ -42,6 +43,11 @@ export class HomeComponent {
    */
   showColumns: LogColumn[];
 
+  /**
+   * Log selected by user.
+   */
+  selectedLog: LogEntry | null = null;
+
   constructor() {
     const initColumns = this.stateSvc.getViewColumns();
 
@@ -59,5 +65,20 @@ export class HomeComponent {
    */
   public classByLevel(level: string | undefined) : string {
     return 'log-' + (level ? numericLogLevel(level) : DEFAULT_LOG_LEVEL);
+  }
+
+  /**
+   * Select log.
+   * Selecting same log again means de-select.
+   */
+  public selectLog(log: LogEntry | null): void {
+    if (log !== null &&
+        this.selectedLog !== null &&
+        this.selectedLog[LOG_KEYS.UID] === log[LOG_KEYS.UID]) {
+      this.selectedLog = null;
+      return;
+    }
+
+    this.selectedLog = log;
   }
 }

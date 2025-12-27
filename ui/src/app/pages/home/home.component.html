@@ -10,7 +10,9 @@
 
     <tbody>
       @for (log of logs(); track log['uid']) {
-        <tr [ngClass]="classByLevel(log['level'])">
+        <tr [ngClass]="classByLevel(log['level'])"
+          [class.selected]="selectedLog !== null && selectedLog['uid'] === log['uid']"
+          (click)="selectLog(log)">
           @for (col of showColumns; track col.key) {
             <td>{{ log[col.key] }}</td>
           }
