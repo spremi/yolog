@@ -7,9 +7,9 @@
 //
 
 
-import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { effect, inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,11 +17,13 @@ import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
 import { LogEntry } from '@base/app.types';
 import { getNormalizedKey, LOG_KEYS } from '@base/models/log-column';
 import {
-  CollectedValues, DynamicFilterKeys, isDynamicFilterKey,
-  UserFilters
+  CollectedValues, DYNAMIC_FILTER_KEYS, DynamicFilterKeys,
+  FilterValues, isDynamicFilterKey,
+  LogFilters, UserFilters
 } from '@base/models/log-filters';
 
 import { StateService } from './state.service';
+import { numericLogLevel } from '@base/models/log-level';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +43,10 @@ export class LogService {
    */
   private _logs = signal<LogEntry[]>([]);
 
+  /**
+   * Filtered logs - for UI.
+   */
+  private _filteredlogs = signal<LogEntry[]>([]);
 
   constructor() {
     this.ws$ = webSocket<LogEntry>(this.ws_uri);
@@ -50,10 +56,18 @@ export class LogService {
       error: (err) => console.error('WebSocket error:', err),
       complete: () => console.log('WebSocket closed'),
     });
+
+    effect(() => {
+      const filters = FilterValues;
+
+      const filtered = this.applyFilters(this._logs(), filters());
+
+      this._filteredlogs.set(filtered);
+    });
   }
 
   public getLogs(): Signal<LogEntry[]> {
-    return this._logs.asReadonly();
+    return this._filteredlogs.asReadonly();
   }
 
   /**
@@ -181,5 +195,30 @@ export class LogService {
           });
         }
       });
+  }
+
+  /**
+   * Apply dynamic filters to incoming logs.
+   *
+   * Filters are applied sequentially.
+   * There is no check for presence of field(s) because default values
+   * are assigned during normalization.
+   */
+  applyFilters(logs: LogEntry[], filters: LogFilters): LogEntry[] {
+    return logs.filter(log => {
+      const logLevelSignal = this.stateSvc.getLogLevel();
+
+      if (numericLogLevel(log[LOG_KEYS.LEVEL]) < logLevelSignal()) {
+        return false;
+      }
+
+      for (const key of DYNAMIC_FILTER_KEYS) {
+        if (filters[key].size > 0 && !filters[key].has(log[key])) {
+          return false;
+        }
+      }
+
+      return true;
+    });
   }
 }
