@@ -21,3 +21,17 @@
     </tbody>
   </table>
 </div>
+
+<div class="log-detail-wrapper" [class.show]="selectedLog !== null">
+  @if (selectedLog != null) {
+    <button class="close"
+      (click)="selectLog(null)">
+      <img ngSrc="/icons/close.svg"
+        width="24"
+        height="24"
+        alt="Close" />
+    </button>
+
+    <sp-log-detail [log]="selectedLog"></sp-log-detail>
+  }
+</div>

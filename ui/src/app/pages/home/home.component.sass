@@ -71,3 +71,20 @@
         font-weight: 500
         color: #ffffff
         background-color: #d32f2f
+
+  .log-detail-wrapper
+    display: flex
+    flex-direction: column
+    margin: 8px 0 0 0
+    opacity: 0
+    transform: translateY(100%)
+    transition: transform 300ms ease, opacity 200ms ease
+    will-change: transform
+
+    &.show
+      transform: translateY(0)
+      opacity: 1
+
+    .close
+      margin: 4px 0
+      align-self: center

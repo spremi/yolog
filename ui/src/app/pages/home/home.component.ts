@@ -7,13 +7,14 @@
 //
 
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
 
 import { DEFAULT_LOG_LEVEL } from '@base/app.defaults';
 import { LogEntry } from '@base/app.types';
 import { LOG_COLUMNS, LOG_KEYS, LogColumn, ShowColumn } from '@base/models/log-column';
 import { numericLogLevel } from '@base/models/log-level';
+import { LogDetailComponent } from '@base/parts/log-detail/log-detail.component';
 
 import { LogService } from '@base/services/log.service';
 import { StateService } from '@base/services/state.service';
@@ -21,7 +22,9 @@ import { StateService } from '@base/services/state.service';
 @Component({
   selector: 'sp-home',
   imports: [
-    CommonModule
+    CommonModule,
+    LogDetailComponent,
+    NgOptimizedImage,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.sass'
