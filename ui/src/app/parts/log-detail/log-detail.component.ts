@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { LogEntry } from '@base/app.types';
+import { LOG_KEYS, LOG_LABELS } from '@base/models/log-column';
 
 @Component({
   selector: 'sp-log-detail',
@@ -7,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './log-detail.component.sass'
 })
 export class LogDetailComponent {
+  @Input() log!: LogEntry | null;
 
+  readonly labels = LOG_LABELS;
+  readonly keys = LOG_KEYS;
 }

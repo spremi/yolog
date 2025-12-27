@@ -1,0 +1,44 @@
+\:host
+  display: flex
+  flex-direction: column
+  padding: 8px
+
+  background-color: var(--detail-bg-color)
+  border-top: 1px solid var(--divider-color)
+
+  .content
+    width: 100%
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr))
+    gap: 8px 8px
+    padding: 8px
+
+    .info
+      display: flex
+      flex-direction: column
+      padding: 4px
+      gap: 4px 4px
+      border: 1px solid var(--divider-color)
+
+      .name
+        font-size: 12px
+        font-weight: 600
+
+        color: var(--contrast-color)
+
+      .value
+        font-family: FiraCode
+        font-size: 12px
+        font-weight: 500
+
+        color: var(--dark-color)
+
+  .message
+    display: block
+    padding: 4px
+
+    font-family: FiraCode
+    font-size: 14px
+    font-weight: 500
+
+    color: var(--message-color)

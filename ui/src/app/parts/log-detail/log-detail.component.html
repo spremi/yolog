@@ -1,1 +1,64 @@
-<p>log-detail works!</p>
+@if (log != null) {
+  <div class="content">
+    <div class="info">
+      <div class="name">{{ labels[keys.TS] }}</div>
+      <div class="value">{{ log[keys.TS] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.ENV] }}</div>
+      <div class="value">{{ log[keys.ENV] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.LEVEL] }}</div>
+      <div class="value">{{ log[keys.LEVEL] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.HOST] }}</div>
+      <div class="value">{{ log[keys.HOST] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.SERVICE] }}</div>
+      <div class="value">{{ log[keys.SERVICE] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.MODULE] }}</div>
+      <div class="value">{{ log[keys.MODULE] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.LOGGER] }}</div>
+      <div class="value">{{ log[keys.LOGGER] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.PROCESS] }}</div>
+      <div class="value">{{ log[keys.PROCESS] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.THREAD] }}</div>
+      <div class="value">{{ log[keys.THREAD] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.TRACE_ID] }}</div>
+      <div class="value">{{ log[keys.TRACE_ID] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.SPAN_ID] }}</div>
+      <div class="value">{{ log[keys.SPAN_ID] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.SEVERITY] }}</div>
+      <div class="value">{{ log[keys.SEVERITY] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.IP] }}</div>
+      <div class="value">{{ log[keys.IP] }}</div>
+    </div>
+    <div class="info">
+      <div class="name">{{ labels[keys.ATTRIBUTES] }}</div>
+      <div class="value">{{ log[keys.ATTRIBUTES] }}</div>
+    </div>
+  </div>
+
+  <div class="message">
+    {{ log [keys.MESSAGE] }}
+  </div>
+}
