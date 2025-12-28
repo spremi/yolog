@@ -1,0 +1,31 @@
+#
+# yo!log
+#
+
+
+# Node
+node_modules
+
+# Angular
+.angular
+
+# IDE
+.idea/
+.vscode/
+
+# Build/ cache
+dist
+.cache
+.eslintcache
+.sass-cache
+
+# Logs
+npm-debug.log
+*.log
+
+# Git
+.git/
+*.diff
+*.patch
+*.orig
+*.rej

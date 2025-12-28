@@ -1,0 +1,26 @@
+#
+# yo!log
+#
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Git
+.git/
+*.diff
+*.patch
+*.orig
+*.rej
