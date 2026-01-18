@@ -60,8 +60,8 @@ log_provider.add_middleware(
 )
 
 
-@log_provider.get('/')
-def provider_root() -> dict[str, str]:
+@log_provider.get('/health')
+def provider_health() -> dict[str, str]:
     return {'status': 'ok'}
 
 
