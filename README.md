@@ -73,6 +73,11 @@ Once the Docker image is running, open your browser at
    evolve into a full-featured log viewer.
 * As a personal side project, updates shall be incremental rather than frequent.
 
+## Acknowledgements
+
+Special thanks to [otelgen](https://github.com/krzko/otelgen) - it was invaluable
+tool for simulating OpenTelemetry logs used to test this application.
+
 
 ## License
 
