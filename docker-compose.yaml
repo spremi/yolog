@@ -1,0 +1,40 @@
+#
+# yo!log
+#
+services:
+  app:
+    build:
+      # Run commands in Dockerfile relative to current directory.
+      context: .
+      dockerfile: docker/Dockerfile
+
+    container_name: yolog
+
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+
+    ports:
+      # Application UI.
+      - "4200:4200"
+      # Application Backend.
+      - "8000:8000"
+      # Default port for OTLP/HTTP exporters. DO NOT CHANGE.
+      - "4318:4318"
+
+    #
+    # Hardening
+    #
+    user: "1000:1000"
+
+    cap_drop:
+      - ALL
+
+    read_only: true
+
+    tmpfs:
+      - /tmp
+      - /var/run
+      - /var/cache/nginx
+
+    stop_grace_period: 40s
