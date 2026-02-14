@@ -3,7 +3,6 @@
 #
 
 import gzip
-import json
 import logging
 
 from fastapi import APIRouter, Request, Response
@@ -13,9 +12,7 @@ from opentelemetry.proto.collector.logs.v1.logs_service_pb2 import (
     ExportLogsServiceResponse,
 )
 
-from state import log_queue_lock, log_queue
-
-from adapters.adapt_log import adapt_log
+from adapters.adapt_log import process_logs
 
 router = APIRouter()
 
@@ -37,24 +34,7 @@ async def log_otlp(request: Request):
     req = ExportLogsServiceRequest()
     req.ParseFromString(body)
 
-    # Logs are deeply nested. The protobuf structure is:
-    # ExportLogsServiceRequest
-    # +- resource_logs(repeated)
-    #    +- resource(service attributes)
-    #    \- scope_logs(repeated)
-    #       +- scope(instrumentation library info)
-    #       \- log_records(repeated)
-    #           +- actual log entries
-    #
-    for resource_logs in req.resource_logs:
-        for scope_logs in resource_logs.scope_logs:
-            for record in scope_logs.log_records:
-                entry = adapt_log(resource_logs, scope_logs, record)
-
-                # logger.info(json.dumps(entry.__dict__, indent=4))
-
-                async with log_queue_lock:
-                    log_queue.append(entry)
+    await process_logs(req.resource_logs)
 
     # Return protobuf response
     resp = ExportLogsServiceResponse()
