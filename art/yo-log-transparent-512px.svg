@@ -27,7 +27,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      inkscape:zoom="1.0141844"
-     inkscape:cx="292.35315"
+     inkscape:cx="292.84615"
      inkscape:cy="199.66783"
      inkscape:window-width="1714"
      inkscape:window-height="930"
@@ -65,27 +65,15 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <text
-       xml:space="preserve"
-       style="font-size:220px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#fbb040;fill-opacity:1;stroke-width:2;stroke-linecap:round"
-       x="86.929741"
-       y="218"
-       id="text1"><tspan
-         sodipodi:role="line"
-         id="tspan1"
-         x="86.929741"
-         y="218"
-         style="font-style:italic;font-variant:normal;font-weight:800;font-stretch:normal;font-size:220px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold Italic';fill:#fbb040;fill-opacity:1">yo!</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:200px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:Montserrat;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#dde9af;fill-opacity:1;stroke-width:2;stroke-linecap:round"
-       x="31.499847"
-       y="445.20001"
-       id="text2"><tspan
-         sodipodi:role="line"
-         id="tspan2"
-         x="31.499847"
-         y="445.20001"
-         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:200px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#dde9af;fill-opacity:1">LOG</tspan></text>
+    <path
+       style="font-style:italic;font-weight:800;font-size:220px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold Italic';fill:#fbb040;stroke-width:2;stroke-linecap:round"
+       d="m 102.32974,262.66 c 25.08,0 40.48,-9.02 59.18,-39.38 l 76.34,-124.52 h -40.92 l -44,73.04 -14.96,-73.04 H 96.389741 L 123.44974,219.1 c -5.06,7.26 -10.12,10.56 -17.6,10.56 -7.259999,0 -13.639999,-2.64 -18.479999,-6.82 l -18.7,29.48 c 7.26,6.16 21.12,10.34 33.659999,10.34 z m 185.46031,-42.68 c 42.68,0 73.26,-29.48 73.26,-69.08 0,-32.78 -24.42,-54.12 -62.48,-54.12 -42.68,0 -73.26,29.48 -73.26,68.86 0,32.78 24.42,54.34 62.48,54.34 z m 2.42,-33.22 c -14.3,0 -22.44,-9.24 -22.44,-23.1 0,-20.02 11.66,-33.66 28.38,-33.66 14.3,0 22.44,9.9 22.44,23.1 0,20.02 -11.66,33.66 -28.38,33.66 z m 91.9602,-24.86 h 33.22 l 27.94,-97.9 h -49.94 z m 8.36,58.08 c 14.74,0 26.18,-11 26.18,-24.86 0,-11.88 -9.68,-20.9 -23.76,-20.9 -14.74,0 -26.18,10.12 -26.18,24.42 0,11.88 9.68,21.34 23.76,21.34 z"
+       id="text1"
+       aria-label="yo!" />
+    <path
+       style="font-weight:800;font-size:200px;line-height:1.5;font-family:Montserrat;-inkscape-font-specification:'Montserrat Ultra-Bold';fill:#dde9af;stroke-width:2;stroke-linecap:round"
+       d="M 45.499847,445.20001 H 151.89985 v -31.4 H 85.099847 v -108.6 h -39.6 z m 190.400183,2.8 c 44.8,0 77.8,-30.8 77.8,-72.8 0,-42 -33,-72.8 -77.8,-72.8 -44.8,0 -77.8,30.8 -77.8,72.8 0,42 33,72.8 77.8,72.8 z m 0,-32.8 c -21.2,0 -37.8,-15.8 -37.8,-40 0,-24.2 16.6,-40 37.8,-40 21.2,0 37.8,15.8 37.8,40 0,24.2 -16.6,40 -37.8,40 z m 168.60012,32.8 c 20.4,0 42.6,-6.2 58.8,-17.8 v -58 h -35 v 38.4 c -7,3.4 -14,4.6 -21.4,4.6 -23.6,0 -39.6,-16.4 -39.6,-40 0,-24.2 16,-40 40,-40 13.4,0 24.4,5 34,15.6 l 25.2,-22.8 c -13.8,-16.6 -35,-25.6 -61.2,-25.6 -45.4,0 -78,30.2 -78,72.8 0,42.6 32.6,72.8 77.2,72.8 z"
+       id="text2"
+       aria-label="LOG" />
   </g>
 </svg>
