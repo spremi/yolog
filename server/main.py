@@ -10,6 +10,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from protocol.server import grpc_aio_server
 from routes.log import router as router_log
 from routes.stream import router as router_stream
 
@@ -80,8 +81,9 @@ async def main() -> None:
 
     logger.info('Ready!')
 
-    # Run both concurrently
+    # Run servers concurrently
     await asyncio.gather(
+        grpc_aio_server(),
         otlp_server.serve(),
         log_server.serve()
     )
