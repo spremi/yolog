@@ -2,13 +2,17 @@
 # yo!log
 #
 
+import json
 import logging
 
 from datetime import datetime, timezone
-from models.log_entry import LogEntry
+from typing import Sequence
 
 from opentelemetry.proto.logs.v1.logs_pb2 import LogRecord, ResourceLogs, ScopeLogs
 from opentelemetry.proto.common.v1.common_pb2 import AnyValue
+
+from models.log_entry import LogEntry
+from state import log_queue, log_queue_lock
 
 logger = logging.getLogger(__name__)
 
@@ -213,3 +217,28 @@ def adapt_log(
     logger.debug(entry)
 
     return entry
+
+
+async def process_logs(resource_logs: Sequence[ResourceLogs]) -> None:
+    """
+    Exported OpenTelemetry logs are deeply nested.
+    The protobuf structure is:
+        ExportLogsServiceRequest
+            resource_logs(repeated
+                resource(service attributes)
+                scope_logs(repeated)
+                    scope(instrumentation library info)
+                    log_records(repeated)
+                        actual log entries
+    """
+    for rl in resource_logs:
+        for sl in rl.scope_logs:
+            for lr in sl.log_records:
+                logger.debug(f'Incoming log: {lr}')
+
+                entry = adapt_log(rl, sl, lr)
+
+                # logger.info(json.dumps(entry.__dict__, indent=4))
+
+                async with log_queue_lock:
+                    log_queue.append(entry)
