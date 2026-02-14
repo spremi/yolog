@@ -7,6 +7,7 @@ name = "pypi"
 fastapi = "==0.128.4"
 opentelemetry-proto = "==1.39.1"
 uvicorn = {extras = ["standard"], version = "==0.40.0"}
+grpcio = "==1.78.0"
 
 [dev-packages]
 
