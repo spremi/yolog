@@ -28,8 +28,12 @@ async def grpc_aio_server() -> None:
     # Bind server to the specified port.
     server.add_insecure_port(f'0.0.0.0:{PORT_OTLP_GRPC}')
 
-    logger.info(f'Listening on gRPC port {PORT_OTLP_GRPC}')
-
     await server.start()
+    logger.info(f'Listening on gRPC port {PORT_OTLP_GRPC}.')
 
-    await server.wait_for_termination()
+    try:
+        await server.wait_for_termination()
+
+    finally:
+        await server.stop(grace=5)
+        logger.info("gRPC server shutdown complete")
