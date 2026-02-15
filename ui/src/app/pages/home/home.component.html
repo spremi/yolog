@@ -14,7 +14,9 @@
           [class.selected]="selectedLog !== null && selectedLog['uid'] === log['uid']"
           (click)="selectLog(log)">
           @for (col of showColumns; track col.key) {
-            <td>{{ log[col.key] }}</td>
+            <td>
+              {{ col.key === logKeys.TS ? (log[col.key] | tsFormat) : log[col.key] }}
+            </td>
           }
         </tr>
       }

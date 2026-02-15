@@ -18,13 +18,15 @@ import { LogDetailComponent } from '@base/parts/log-detail/log-detail.component'
 
 import { LogService } from '@base/services/log.service';
 import { StateService } from '@base/services/state.service';
+import { TsFormatPipe } from '@pipes/ts-format.pipe';
 
 @Component({
   selector: 'sp-home',
   imports: [
     CommonModule,
-    LogDetailComponent,
     NgOptimizedImage,
+    LogDetailComponent,
+    TsFormatPipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.sass'
@@ -34,7 +36,8 @@ export class HomeComponent {
   logSvc = inject(LogService);
   stateSvc = inject(StateService);
 
-  logColumns = LOG_COLUMNS;
+  readonly logColumns = LOG_COLUMNS;
+  readonly logKeys = LOG_KEYS;
 
   /**
    * List of logs.
