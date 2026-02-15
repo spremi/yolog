@@ -13,7 +13,8 @@ import {
   DEFAULT_LOG_COLUMNS,
   DEFAULT_LOG_COUNT,
   DEFAULT_LOG_LEVEL,
-  DEFAULT_MENU_POSITION
+  DEFAULT_MENU_POSITION,
+  DEFAULT_TIMEZONE
 } from '@base/app.defaults';
 import { MenuPosition } from '@base/app.types';
 import { AppSettings } from '@base/models/app-settings';
@@ -26,11 +27,13 @@ export class SettingsService {
   private readonly K_LOG_LEVEL = 'level';
   private readonly K_LOG_COUNT = 'count';
   private readonly K_VIEW_COLUMNS = 'cols';
+  private readonly K_TZ = 'tz';
 
   private _menuPosition: WritableSignal<MenuPosition>;
   private _logLevel: WritableSignal<number>;
   private _logCount: WritableSignal<number>;
   private _viewColumns: WritableSignal<string[]>;
+  private _timeZone: WritableSignal<string>;
 
   // Derived signal - Combination of individual signals above.
   private readonly _appSettings: Signal<AppSettings>;
@@ -48,11 +51,15 @@ export class SettingsService {
     const viewColumns = this.readStore<string[]>(this.K_VIEW_COLUMNS, DEFAULT_LOG_COLUMNS);
     this._viewColumns = signal(viewColumns);
 
+    const timeZone = this.readStore<string>(this.K_TZ, DEFAULT_TIMEZONE);
+    this._timeZone = signal(timeZone);
+
     this._appSettings = computed<AppSettings>(() => ({
       menuPosition: this._menuPosition(),
       logLevel: this._logLevel(),
       logCount: this._logCount(),
       viewColumns: this._viewColumns(),
+      timeZone: this._timeZone(),
     }));
   }
 
@@ -95,6 +102,16 @@ export class SettingsService {
   public setViewColumns(columns: string[]) {
     this._viewColumns.set(columns);
     localStorage.setItem(this.K_VIEW_COLUMNS, JSON.stringify(columns));
+  }
+
+  public getTimeZone(): string {
+    return this._timeZone();
+  }
+
+  public setTimeZone(zone: string): void {
+    this._timeZone.set(zone);
+
+    localStorage.setItem(this.K_TZ, zone);
   }
 
   public getAppSettings(): Signal<AppSettings> {

@@ -30,3 +30,8 @@ export const DEFAULT_LOG_COUNT = 500;
  * Keep menu position in original design as default.
  */
 export const DEFAULT_MENU_POSITION = 'right';
+
+/**
+ * Timezone
+ */
+export const DEFAULT_TIMEZONE = 'UTC';

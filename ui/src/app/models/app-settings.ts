@@ -31,4 +31,9 @@ export interface AppSettings {
    * Visible columns.
    */
   viewColumns: string[];
+
+  /**
+   * Timezone.
+   */
+  timeZone: string;
 }
