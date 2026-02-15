@@ -14,3 +14,8 @@ export type MenuPosition = 'left' | 'right';
  * Defines generic structure of log as dictionary.
  */
 export type LogEntry = Record<string, string>;
+
+/**
+ * Define mode for timestamp.
+ */
+export type TsMode = 'DATE_TIME' |  'TIME' ;

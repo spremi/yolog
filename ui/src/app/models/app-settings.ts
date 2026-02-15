@@ -6,7 +6,7 @@
 // BSD-3-Clause License
 //
 
-import { MenuPosition } from '@base/app.types';
+import { MenuPosition, TsMode } from '@base/app.types';
 
 /**
  * Collection of all settings that are explicitly saved by the user.
@@ -36,4 +36,9 @@ export interface AppSettings {
    * Timezone.
    */
   timeZone: string;
+
+  /**
+   * Timestamp mode.
+   */
+  tsMode: TsMode;
 }

@@ -14,9 +14,10 @@ import {
   DEFAULT_LOG_COUNT,
   DEFAULT_LOG_LEVEL,
   DEFAULT_MENU_POSITION,
-  DEFAULT_TIMEZONE
+  DEFAULT_TIMEZONE,
+  DEFAULT_TS_MODE
 } from '@base/app.defaults';
-import { MenuPosition } from '@base/app.types';
+import { MenuPosition, TsMode } from '@base/app.types';
 import { AppSettings } from '@base/models/app-settings';
 
 @Injectable({
@@ -28,12 +29,14 @@ export class SettingsService {
   private readonly K_LOG_COUNT = 'count';
   private readonly K_VIEW_COLUMNS = 'cols';
   private readonly K_TZ = 'tz';
+  private readonly K_TS_MODE = 'tsm';
 
   private _menuPosition: WritableSignal<MenuPosition>;
   private _logLevel: WritableSignal<number>;
   private _logCount: WritableSignal<number>;
   private _viewColumns: WritableSignal<string[]>;
   private _timeZone: WritableSignal<string>;
+  private _tsMode: WritableSignal<TsMode>;
 
   // Derived signal - Combination of individual signals above.
   private readonly _appSettings: Signal<AppSettings>;
@@ -54,12 +57,16 @@ export class SettingsService {
     const timeZone = this.readStore<string>(this.K_TZ, DEFAULT_TIMEZONE);
     this._timeZone = signal(timeZone);
 
+    const tsMode = this.readStore<TsMode>(this.K_TS_MODE, DEFAULT_TS_MODE);
+    this._tsMode = signal(tsMode);
+
     this._appSettings = computed<AppSettings>(() => ({
       menuPosition: this._menuPosition(),
       logLevel: this._logLevel(),
       logCount: this._logCount(),
       viewColumns: this._viewColumns(),
       timeZone: this._timeZone(),
+      tsMode: this._tsMode(),
     }));
   }
 
@@ -112,6 +119,16 @@ export class SettingsService {
     this._timeZone.set(zone);
 
     localStorage.setItem(this.K_TZ, zone);
+  }
+
+  public getTsMode(): TsMode {
+    return this._tsMode();
+  }
+
+  public setTimestampMode(mode: TsMode): void {
+    this._tsMode.set(mode);
+
+    localStorage.setItem(this.K_TS_MODE, mode);
   }
 
   public getAppSettings(): Signal<AppSettings> {

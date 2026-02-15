@@ -35,3 +35,8 @@ export const DEFAULT_MENU_POSITION = 'right';
  * Timezone
  */
 export const DEFAULT_TIMEZONE = 'UTC';
+
+/**
+ * Timestamp Mode.
+ */
+export const DEFAULT_TS_MODE = 'DATE_TIME';
