@@ -55,6 +55,7 @@ RUN pipenv install --deploy --ignore-pipfile
 # Copy server sources
 COPY server/adapters/       ./adapters/
 COPY server/models/         ./models/
+COPY server/protocol/       ./protocol/
 COPY server/routes/         ./routes/
 COPY server/main.py         ./main.py
 COPY server/state.py        ./state.py
@@ -90,7 +91,7 @@ RUN chown -R appuser:appuser /app /var/log/nginx /var/lib/nginx
 USER appuser
 
 # Expose ports (env-driven)
-EXPOSE 4200 8000 4138
+EXPOSE 4200 8000 4317 4318
 
 ENTRYPOINT ["/entrypoint.sh"]
 
