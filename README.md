@@ -52,7 +52,7 @@ loggers.
 ### Running with `docker run`
 
 ```sh
-docker run --rm -p 4200:4200 -p 8000:8000 -p 4318:4318 yolog-v080
+docker run --rm -p 4200:4200 -p 8000:8000 -p 4317:4317 -p 4318:4318 yolog-v080
 
 ```
 
