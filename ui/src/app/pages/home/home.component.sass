@@ -86,5 +86,12 @@
       opacity: 1
 
     .close
-      margin: 4px 0
-      align-self: center
+      margin: 4px 8px 4px 0
+      align-self: end
+      background-color: var(--button-close-hover-bg-color)
+      transition: opacity 250ms ease
+      opacity: 0.4
+
+      &:hover
+        background-color: var(--button-close-hover-bg-color)
+        opacity: 1.0
