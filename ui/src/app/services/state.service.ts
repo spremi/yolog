@@ -11,7 +11,7 @@ import {
   effect, inject, Injectable, Signal, signal, untracked, WritableSignal
 } from '@angular/core';
 
-import { MenuPosition } from '@base/app.types';
+import { MenuPosition, TsMode } from '@base/app.types';
 import { AppSettings } from '@base/models/app-settings';
 
 import { SettingsService } from './settings.service';
@@ -34,6 +34,7 @@ export class StateService {
   private _logCount: WritableSignal<number>;
   private _viewColumns: WritableSignal<string[]>;
   private _timeZone: WritableSignal<string>;
+  private _tsMode: WritableSignal<TsMode>;
 
   /**
    * Logs are paused?
@@ -50,6 +51,7 @@ export class StateService {
     this._logCount = signal(initial.logCount);
     this._viewColumns = signal(initial.viewColumns);
     this._timeZone = signal(initial.timeZone);
+    this._tsMode = signal(initial.tsMode);
 
     effect(() => {
       // Read the 'signal'.
@@ -63,6 +65,7 @@ export class StateService {
         this._logCount.set(update.logCount);
         this._viewColumns.set(update.viewColumns);
         this._timeZone.set(update.timeZone);
+        this._tsMode = signal(update.tsMode);
       });
     });
   }
@@ -123,5 +126,13 @@ export class StateService {
 
   public setTimeZone(zone: string): void {
     this._timeZone.set(zone);
+  }
+
+  public getTsMode(): Signal<TsMode> {
+    return this._tsMode.asReadonly();
+  }
+
+  public setTsMode(mode: TsMode): void {
+    this._tsMode.set(mode);
   }
 }
