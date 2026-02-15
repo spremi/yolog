@@ -8,6 +8,14 @@
       <div class="name">{{ labels[keys.ENV] }}</div>
       <div class="value">{{ log[keys.ENV] }}</div>
     </div>
+    <div class="info double">
+      <div class="name">{{ labels[keys.TRACE_ID] }}</div>
+      <div class="value">{{ log[keys.TRACE_ID] }}</div>
+    </div>
+    <div class="info double">
+      <div class="name">{{ labels[keys.SPAN_ID] }}</div>
+      <div class="value">{{ log[keys.SPAN_ID] }}</div>
+    </div>
     <div class="info">
       <div class="name">{{ labels[keys.LEVEL] }}</div>
       <div class="value">{{ log[keys.LEVEL] }}</div>
@@ -35,14 +43,6 @@
     <div class="info">
       <div class="name">{{ labels[keys.THREAD] }}</div>
       <div class="value">{{ log[keys.THREAD] }}</div>
-    </div>
-    <div class="info">
-      <div class="name">{{ labels[keys.TRACE_ID] }}</div>
-      <div class="value">{{ log[keys.TRACE_ID] }}</div>
-    </div>
-    <div class="info">
-      <div class="name">{{ labels[keys.SPAN_ID] }}</div>
-      <div class="value">{{ log[keys.SPAN_ID] }}</div>
     </div>
     <div class="info">
       <div class="name">{{ labels[keys.SEVERITY] }}</div>
