@@ -17,6 +17,9 @@
       "@pages/*": [
         "app/pages/*"
       ],
+      "@pipes/*": [
+        "app/pipes/*"
+      ],
       "@services/*": [
         "app/services/*"
       ]
