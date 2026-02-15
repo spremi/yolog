@@ -20,6 +20,7 @@ services:
       # Application Backend.
       - "8000:8000"
       # Default port for OTLP/HTTP exporters. DO NOT CHANGE.
+      - "4317:4317"
       - "4318:4318"
 
     #
