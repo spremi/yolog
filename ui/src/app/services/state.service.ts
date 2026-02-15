@@ -33,6 +33,7 @@ export class StateService {
   private _logLevel: WritableSignal<number>;
   private _logCount: WritableSignal<number>;
   private _viewColumns: WritableSignal<string[]>;
+  private _timeZone: WritableSignal<string>;
 
   /**
    * Logs are paused?
@@ -48,6 +49,7 @@ export class StateService {
     this._logLevel = signal(initial.logLevel);
     this._logCount = signal(initial.logCount);
     this._viewColumns = signal(initial.viewColumns);
+    this._timeZone = signal(initial.timeZone);
 
     effect(() => {
       // Read the 'signal'.
@@ -60,6 +62,7 @@ export class StateService {
         this._logLevel.set(update.logLevel);
         this._logCount.set(update.logCount);
         this._viewColumns.set(update.viewColumns);
+        this._timeZone.set(update.timeZone);
       });
     });
   }
@@ -112,5 +115,13 @@ export class StateService {
 
   public setViewColumns(columns: string[]): void {
     this._viewColumns.set(columns);
+  }
+
+  public getTimeZone(): Signal<string> {
+    return this._timeZone.asReadonly();
+  }
+
+  public setTimeZone(zone: string): void {
+    this._timeZone.set(zone);
   }
 }
